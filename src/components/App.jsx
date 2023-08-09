@@ -1,7 +1,6 @@
 import React from 'react';
 
 import {TodoList} from './TodoList.jsx';
-import {FormInput} from './FormInput.jsx';
 
 export class App extends React.Component {
     constructor() {
@@ -17,7 +16,6 @@ export class App extends React.Component {
         return (
             <main>
                 <TodoList />
-                <FormInput />
             </main>
         )
     }

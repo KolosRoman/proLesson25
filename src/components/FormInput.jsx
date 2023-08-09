@@ -13,17 +13,13 @@ export class FormInput extends React.Component {
     onAddTodo = (e) => {
         e.preventDefault();
         if(this.state.addTodo !== '') {
-            let block = document.getElementById('todo-block');
-            let newTodo = document.createElement('li');
-            newTodo.classList.add('todo-list')
-            newTodo.innerText = this.state.addTodo;
-            block.append(newTodo);
+            this.props.newTodo({
+                newelement: this.state.addTodo
+            })
             this.setState({
                 addTodo: ''
             })
         }
-
-        
     }
 
     onTodoChange = (e) => {

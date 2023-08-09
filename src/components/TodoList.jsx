@@ -1,6 +1,7 @@
 import React from "react";
 
-import {TodoArray} from "./TodoArray.jsx";
+import {TodoArray} from "./TodoArray.js";
+import {FormInput} from "./FormInput.jsx";
 
 export class TodoList extends React.Component {
     constructor() {
@@ -11,14 +12,16 @@ export class TodoList extends React.Component {
         }
     }
 
-    onTodoClick(el) {
-    
-        let array = document.getElementsByClassName('todo-list')
-        for (let i = 0; i < array.length; i++) {
-            if (array[i].innerHTML === el) {
-                array[i].classList.toggle('todo-done')
-            }
-        }
+    onTodoClick = (e) => {
+        e.target.classList.toggle('todo-done')
+    }
+
+    addNewTodo = ({newelement}) => {
+        TodoArray.push(newelement);
+        this.setState({
+            array: TodoArray
+        })
+
     }
 
 
@@ -38,15 +41,16 @@ export class TodoList extends React.Component {
                         </div>
                     </div>
                 </div>
-                <ul onClick={(e) => this.onTodoClick(e.target.textContent)} id="todo-block" className="todo-block">
+                <ul  id="todo-block" className="todo-block">
                     {
-                        this.state.array.map(el => {
+                        this.state.array.map((el, index) => {
                             return (
-                                <li className="todo-list">{el}</li>
+                                <li key={index} onClick={(e) => this.onTodoClick(e)} className="todo-list">{el}</li>
                             )
                         })
                     }
                 </ul>
+                <FormInput newTodo={this.addNewTodo}/>
             </div>
         )
     }
